@@ -8,7 +8,7 @@ platforms/ios/cordova/console.log
 *.xcuserdatad
 
 # android
-platforms/android/assets/www
+RestTool/platforms/android/assets/www
 platforms/android/bin
 platforms/android/gen
 platforms/android/local.properties
