@@ -1,0 +1,239 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/tshock.css" />
+    <link rel="stylesheet" href="css/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.3/jquery.mobile.structure-1.4.3.min.css" />
+    <link rel="stylesheet" href="css/colpick.css" type="text/css" />
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.js"></script>
+    <script src="scripts/utils.js"></script>
+    <script src="scripts/tshock.js"></script>
+    <script src="scripts/colpick.js"></script>
+    <script id="panel-init">
+        $(function () {
+            $("body>[data-role='panel']").panel();
+        });
+    </script>
+    <title>RestTool</title>
+</head>
+<body>
+    <!--Pages-->
+    <div data-role="page" id="tshock">
+        <div data-role="header" data-position="inline">
+            <!--<a href="#" data-icon="bars" class="ui-btn-left" data-rel="dialog" data-transition="flip" data-iconpos="notext">Logout</a>-->
+            <h1 class="ui-title" role="heading" aria-level="1">RestTool - TShock</h1>
+            <a href="#sidebar" data-icon="bars" class="ui-btn-right" data-iconpos="notext">Logout</a>
+        </div>
+        <div data-role="content" id="content">
+            <ul data-role="listview" data-inset="true" data-divider-theme="a">
+                <h2 id="loading">Loading...</h2>
+                <li data-role="list-divider">Server Information</li>
+                <li>
+                    <span class="infobox" id="infobox"></span>
+                </li>
+            </ul>
+        </div>
+        <div data-role="footer" data-position="fixed">
+            <p><a href="#" data-transition="fade">RestTool</a></p>
+        </div>
+    </div>
+
+    <div data-role="page" id="usermanagement">
+        <div data-role="header">
+            <h1>User Management</h1>
+            <a href="tshock.html" data-icon="back" data-role="button" data-transition="fade" data-direction="reverse" data-iconpos="notext">back</a>
+            <a href="#sidebar" data-icon="bars" class="ui-btn-right" data-iconpos="notext">Logout</a>
+        </div><!-- /header -->
+        <div role="main" class="ui-content">
+            <ul data-role="listview" data-inset="true" data-divider-theme="a">
+                <li data-role="list-divider">Users</li>
+                <li><a id="adduser" href="#diaAddUser">Create user</a></li>
+                <li><a id="deluser" href="#diaDelUser">Destroy user</a></li>
+                <li><a id="upduser" href="#diaUpdUser">Update user</a></li>
+            </ul>
+            <ul data-role="listview" data-inset="true" data-divider-theme="a">
+                <li data-role="list-divider">Groups</li>
+                <li><a id="addgroup" href="#createGroup">Create group</a></li>
+                <li><a id="delgroup" href="#deleteGroup">Destroy group</a></li>
+                <!--<li><a id="updgroup" href="#">Update group</a></li>
+                <li><a id="listgroups" href="#">List groups</a></li>-->
+            </ul>
+        </div><!-- /content -->
+        <div data-role="footer" data-position="fixed">
+            <p><a href="#" data-transition="fade">RestTool</a></p>
+        </div><!-- /footer -->
+    </div>
+
+    <div data-role="page" id="pageTime">
+        <div data-role="header">
+            <h1>Time</h1>
+            <a href="tshock.html" data-icon="back" data-role="button" data-transition="fade" data-direction="reverse" data-iconpos="notext">back</a>
+            <a href="#sidebar" data-icon="bars" class="ui-btn-right" data-iconpos="notext">Logout</a>
+        </div><!-- /header -->
+        <div role="main" class="ui-content">
+
+
+            <ul data-role="listview" data-inset="true">
+                <li data-role="list-divider">Set time</li>
+                <li>
+                    <a id="settime-dawn" href="#">
+                        <img src="images/dawn.png">
+                        <h2>Dawn</h2>
+                        <p>04:30</p>
+                    </a>
+                </li>
+                <li>
+                    <a id="settime-noon" href="#">
+                        <img src="images/noon.png">
+                        <h2>Noon</h2>
+                        <p>12:00</p>
+                    </a>
+                </li>
+                <li>
+                    <a id="settime-dusk" href="#">
+                        <img src="images/dusk.png">
+                        <h2>Dusk</h2>
+                        <p>18:30</p>
+                    </a>
+                </li>
+                <li>
+                    <a id="settime-midnight" href="#">
+                        <img src="images/midnight.png">
+                        <h2>Midnight</h2>
+                        <p>00:00</p>
+                    </a>
+                </li>
+            </ul>
+
+            <ul data-role="listview" data-inset="true">
+                <li data-role="list-divider">Start event</li>
+                <li>
+                    <a id="setevent-blood" href="#">
+                        <img src="images/bloodmoon.png">
+                        <h2>Blood moon</h2>
+                        <p>Starts the blood moon event.</p>
+                    </a>
+                </li>
+                <li>
+                    <a id="setevent-eclipse" href="#">
+                        <img src="images/eclipse.png">
+                        <h2>Eclipse</h2>
+                        <p>Starts the solar eclipse event.</p>
+                    </a>
+                </li>
+                <li>
+                    <a id="setevent-pumpkin" href="#">
+                        <img src="images/bloodmoon.png">
+                        <h2>Pumpkinmoon</h2>
+                        <p>Starts the pumpkin moon event.</p>
+                    </a>
+                </li>
+                <li>
+                    <a id="setevent-frost" href="#">
+                        <img src="images/frost.png" height="64" width="64">
+                        <h2>Frostmoon</h2>
+                        <p>Starts the frost moon event.</p>
+                    </a>
+                </li>
+            </ul>
+
+        </div><!-- /content -->
+        <div data-role="footer" data-position="fixed">
+            <p><a href="#" data-transition="fade">RestTool</a></p>
+        </div><!-- /footer -->
+    </div>
+
+    <div data-role="page" id="pageConsole">
+        <div data-role="header">
+            <h1>Spawns</h1>
+            <a href="tshock.html" data-icon="back" data-role="button" data-transition="fade" data-direction="reverse" data-iconpos="notext">back</a>
+            <a href="#sidebar" data-icon="bars" class="ui-btn-right" data-iconpos="notext">Logout</a>
+        </div><!-- /header -->
+        <div role="main" class="ui-content">
+            
+        <ul data-role="listview" data-inset="true" data-divider-theme="a">
+                <li data-role="list-divider">Run console command</li>
+                <li>
+                    <input type="text" id="conCommand" value="" placeholder="Command" />
+                </li>
+            </ul>
+
+        </div><!-- /content -->
+        <div data-role="footer" data-position="fixed">
+            <p><a href="#" data-transition="fade">RestTool</a></p>
+        </div><!-- /footer -->
+    </div>
+
+    <!--Dialogs-->
+    <div data-role="dialog" id="diaAddUser">
+        <div data-role="header" data-theme="a"><h1>Create user</h1></div>
+        <div role="main" class="ui-content">
+            <h1>Create user</h1>
+            <p>Enter preferred username and password.</p>
+            <input name="user" type="text" id="user" placeholder="Username" />
+            <input name="pw" type="password" id="pw" placeholder="Password" />
+            <a data-role="button" id="btnAddUser" href="#" data-iconpos="right" name="submit">Create</a>
+        </div>
+    </div>
+
+    <div data-role="dialog" id="diaSpawn">
+        <div data-role="header" data-theme="a"><h1>Spawn mob</h1></div>
+        <div role="main" class="ui-content">
+            <h1>Spawn mob</h1>
+            <p>Enter preferred username and password.</p>
+            <input name="user" type="text" id="user" placeholder="Username" />
+            <input name="pw" type="password" id="pw" placeholder="Password" />
+            <a data-role="button" id="btnAddUser" href="#" data-iconpos="right" name="submit">Create</a>
+        </div>
+    </div>
+
+    <div data-role="dialog" id="diaDelUser">
+        <div data-role="header" data-theme="a"><h1>Remove user</h1></div>
+        <div role="main" class="ui-content">
+            <h1>Remove user</h1>
+            <p>Enter username and password.</p>
+            <input name="user" type="text" id="inpDelUser" placeholder="Username" />
+            <a data-role="button" id="btnDelUser" href="#" data-iconpos="right" name="submit">Delete</a>
+        </div>
+    </div>
+
+    <div data-role="dialog" id="diaUpdUser">
+        <div data-role="header" data-theme="a"><h1>Update user</h1></div>
+        <div role="main" class="ui-content">
+            <h1>Update user</h1>
+            <p>Enter the old username and the new password.</p>
+            <input name="userold" type="text" id="userold" placeholder="old Username" />
+            <input name="pwnew" type="password" id="pwnew" placeholder="new Password" />
+            <a data-role="button" id="btnUpdUser" href="#" data-iconpos="right" name="submit">Update</a>
+        </div>
+    </div>
+
+    <div data-role="dialog" id="createGroup">
+        <div data-role="header" data-theme="a"><h1>Create group</h1></div>
+        <div role="main" class="ui-content">
+            <h1>Create group</h1>
+            <p>Enter group name and choose a group colour.</p>
+            <input name="groupname" type="text" id="groupname" placeholder="group name" />
+            <input type="text" value="" id="picker" />
+            <a data-role="button" id="btnAddGroup" href="#" data-iconpos="right" name="submit">create</a>
+        </div>
+    </div>
+
+    <div data-role="dialog" id="deleteGroup">
+        <div data-role="header" data-theme="a"><h1>Delete group</h1></div>
+        <div role="main" class="ui-content">
+            <h1>Delete group</h1>
+            <p>Enter the group name.</p>
+            <input name="inpdelgroup" type="text" id="inpdelgroup" placeholder="group name" />
+            <a data-role="button" id="btnDelGroup" href="#" data-iconpos="right" name="submit">Delete</a>
+        </div>
+    </div>
+    <!--Update- and DeleteGroup will be developed later on. GUI has higher priority-->
+
+</body>
+</html>

@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">            
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script src="scripts/utils.js"></script>
+    <script src="scripts/index.js"></script>
+    <title>Rest-Tool</title>
+</head>
+<body>
+    <script src="cordova.js"></script>
+    <script src="scripts/platformOverrides.js"></script>
+
+    <div data-role="page" id="index">
+        <div data-role="header" data-position="inline">
+            <h1 class="ui-title" role="heading" aria-level="1">Rest-Tool</h1>
+        </div>
+        <div data-role="content">
+            <div id="login">
+                <h2>Login</h2>
+                <div id="error" style="color:#f00;"></div>
+                <input name="server" type="text" id="server" value="134.255.235.6:7878" placeholder="IP or Domain:Port" />
+                <input name="user" type="text" id="user" value="MasterExploder" placeholder="Username [admin]" />
+                <input name="pw" type="password" id="pw" value="koko91" placeholder="Password" />
+                <select name="game" id="game" data-native-menu="false">
+                    <option value="" disabled>Select Game</option>
+                    <option value="tshock" selected>TShock for Terraria</option>
+                    <option value="" disabled>More are coming...</option>
+                </select>
+                <a data-role="button" href="#" data-icon="arrow-r" data-iconpos="right" name="submit" id="submit">Go!</a>
+            </div>
+            <div id="sessions">
+                <h2>Active sessions</h2>
+            </div>
+        </div>
+        <div data-role="footer" data-position="fixed">
+            <p><a href="#" data-transition="fade">Rest-Tool</a></p>
+        </div>
+    </div>
+</body>
+</html>

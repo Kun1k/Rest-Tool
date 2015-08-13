@@ -1,0 +1,222 @@
+input.ui-input-text, textarea.ui-input-text {
+    margin: 0;
+}
+
+.ui-content, .ui-dialog .ui-content {
+    padding: 5px 10px;
+}
+    /*10 15*/
+    .ui-controlgroup, fieldset.ui-controlgroup, .ui-content p, .ui-content h3 {
+        margin: 0.75em 0;
+    }
+
+h3.ui-collapsible-heading {
+    margin: 0 -8px;
+}
+
+.ui-collapsible-content {
+    padding: 1px 15px;
+}
+
+.ui-listview-filter-inset {
+    margin: 0 -5px -5px -5px;
+}
+
+.ui-listview p, .ui-listview h3 {
+    margin: 0.25em 1.25em 0.25em 0;
+}
+
+hr {
+    margin: 1em 0;
+    border: 0;
+    border-top: 1px solid #BBBBBB;
+}
+
+.ui-content {
+    max-width: 738px;
+    margin: 0 auto;
+}
+
+.txt-r {
+    text-align: right;
+}
+
+.txt-c {
+    text-align: center;
+}
+
+.nospace {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.nospace-bottom {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+.nospace-top {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+ul {
+    padding-left: 1em;
+}
+
+.ui-navbar a {
+    margin-right: 0 !important;
+}
+
+.ui-navbar-noicons li .ui-btn .ui-btn-inner, .ui-navbar-noicons .ui-navbar-toggle .ui-btn-inner {
+    padding-bottom: 0.45em;
+    padding-top: 0.4em;
+}
+
+.ui-header .ui-btn-inner, .ui-footer .ui-btn-inner {
+    font-size: 16px;
+}
+
+.ui-mini .ui-btn-inner {
+    font-size: 14px;
+}
+
+.ui-footer p {
+    text-align: center;
+    margin-bottom: 0.45em;
+    margin-top: 0.4em;
+}
+
+.ui-footer .ui-btn {
+    display: inline-block;
+    margin: 0;
+}
+
+.ui-bar {
+    padding-left: 0;
+}
+
+.ui-li-desc {
+    font-size: 13px;
+}
+
+.ui-li-has-count .ui-li-count {
+    font-size: 12px;
+}
+
+.ui-li .ui-btn-inner a.ui-link-inherit, .ui-li-static.ui-li {
+    padding: 0.5em 15px;
+}
+
+.ui-li-aside {
+    margin: 0.5em 0;
+}
+/*.ui-header .ui-title { margin:0.6em 15% 0.4em 15%; }*/
+iframe {
+    border: 0;
+}
+/* dialog close button position right */
+.ui-dialog .ui-header .ui-btn-left {
+    left: auto;
+    right: 10px;
+}
+/* change collapsible content icons from plus/minus to arrow-r/arrow-d */
+.ui-collapsible.ui-collapsible-collapsed .ui-collapsible-heading .ui-icon-plus {
+    background-position: -108px 0;
+}
+
+.ui-collapsible .ui-collapsible-heading .ui-icon-minus {
+    background-position: -216px 0;
+}
+
+.ui-bar
+/* status icons */
+/* custom icons */
+/*Button "X" ausblenden:*/
+#dialog2.ui-dialog .ui-header .ui-btn-icon-notext {
+    display: none;
+}
+
+#dialog4.ui-dialog .ui-header .ui-btn-icon-notext {
+    display: none;
+}
+
+#dialog3.ui-dialog .ui-header .ui-btn-icon-notext {
+    display: none;
+}
+
+#timeout.ui-dialog .ui-header .ui-btn-icon-notext {
+    display: none;
+}
+
+#indexFehler.ui-dialog .ui-header .ui-btn-icon-notext {
+    display: none;
+}
+
+#dialog_firma.ui-dialog .ui-header .ui-btn-icon-notext {
+    display: none;
+}
+
+#dialog6.ui-footer {
+    display: none;
+}
+
+
+/*Infobox*/
+
+
+
+.infobox {
+    background-color: #EDEDED;
+    display: none;
+    border: 2px solid white;
+    border-radius: 20px;   
+}
+
+
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2) {
+}
+
+.ui-bar-a a.ui-link {
+    color: #7cc4e7 !important;
+    text-decoration: underline;
+}
+
+    .ui-bar-a a.ui-link:hover {
+        color: #2489ce !important;
+    }
+
+/* Placeholder fix */
+*::-webkit-input-placeholder {
+    color: #555;
+    opacity: 1;
+}
+
+*:-moz-placeholder {
+    color: #555 !important;
+    opacity: 1;
+}
+
+*::-moz-placeholder {
+    color: #555 !important;
+    opacity: 1;
+}
+
+*:-ms-input-placeholder { /* IE10+ */
+    color: #555;
+    opacity: 1;
+}
+
+#picker {
+    height: 20px;
+    border-right: 50px solid green;
+    line-height: 20px;
+}
+
+.gridBox {
+    background-color: #EDEDED;    
+    border: 2px solid white;
+    border-radius: 20px;
+    padding: 50px;
+}
