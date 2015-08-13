@@ -29,3 +29,5 @@ proguard/
 #Platforms
 platforms/
 plugins/
+windows/
+ios/
