@@ -139,7 +139,6 @@
     "res\\icons\\android\\icon-36-ldpi.png",
     "merges\\windows\\scripts\\platformOverrides.js",
     "res\\screens\\ios\\screen-iphone-portrait.png",
-    "Project_Readme.html",
     "res\\screens\\android\\screen-xhdpi-portrait.png",
     "www\\css\\colpick.css",
     "www\\css\\images\\icons-png\\shop-white.png",
@@ -184,13 +183,18 @@
     "www\\css\\images\\icons-png\\carat-r-black.png",
     "www\\css\\images\\icons-png\\search-white.png",
     "res\\icons\\windows\\Square44x44Logo.scale-240.png",
-    "res\\screens\\android\\screen-mdpi-portrait.png"
+    "res\\screens\\android\\screen-mdpi-portrait.png",
+    "www\\scripts\\jquery.tabletojson.js",
+    "www\\scripts\\index.js~RF5c1e109.TMP"
   ],
-  "deletedFilesIos": [],
+  "deletedFilesIos": [
+    "Project_Readme.html"
+  ],
   "addedPluginsIos": [],
   "deletedPluginsIos": [],
   "changedFiles": [
-    "www\\scripts\\index.js"
+    "www\\scripts\\index.js",
+    "www\\index.html"
   ],
   "deletedFiles": [],
   "addedPlugins": [],

@@ -18,11 +18,21 @@
         if (redErr != null) {
             $("#error").text(redErr);
             setCookie("redirectError", "");
-        }        
+        }
 
         checkSessions();
 
         $("a#submit").click(function () {
+
+            //JSON TEST
+
+            //var jsonTable = $('#terraria').tableToJSON({
+            //    allowHTML: true,
+            //});
+
+            //$(jsonTable[0].Object).find('img')[0].src -> Picture Link
+            //$(jsonTable[0].Object)[0].innerText -> Item Name
+            //jsonTable[0].value -> Item ID
 
             // load form data
             var server = $("input#server").val() || null;
@@ -77,7 +87,7 @@
                     break;
             }
 
-        });        
+        });
 
     };
 
@@ -95,10 +105,15 @@
         $.ajax({
             type: "GET",
             //url: "http://" + server + "/token/create/" + user + "/" + pw,
-            url: "https://terraria.gamepedia.com/api.php?action=query&titles=Item_IDs&prop=revisions&rvprop=content&rvsection=3&format=json",
+            url: "https://terraria.gamepedia.com/api.php?action=parse&page=Item%20IDs%20Part1&format=json",
             dataType: "json",
             success: function (data) {
                 // check REST response
+                var tableHTML = $(data.parse.text["*"])[2].outerHTML;
+                $("#test").append(tableHTML);
+                $("#test").show;
+                var tableJson = $(tableHTML).tableToJSON({ allowHTML: true });
+
                 if (data.status == 200) {
                     var token = data.token;
                     setCookie("tshock-token", token);
