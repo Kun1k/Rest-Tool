@@ -1,10 +1,11 @@
+var tableJson = [];
 var token = null;
 var server = null;
 var color = null;
 var panel = '<div data-role="panel" id="sidebar" data-theme="a" data-position="right" data-display="overlay">' +
-            '<a href="#usermanagement" class="ui-btn ui-corner-all">User management</a>' +
-            '<a href="#pageTime" class="ui-btn ui-corner-all">Time Settings</a>' +
-            '<a href="#" class="ui-btn ui-corner-all">Items</a>' +
+            '<a href="#usermanagement" id="usermanagementLink" class="ui-btn ui-corner-all">User management</a>' +
+            '<a href="#pageTime" id="pageTimeLink" class="ui-btn ui-corner-all">Time Settings</a>' +
+            '<a href="#pageItems" id="pageItemsLink" class="ui-btn ui-corner-all">Items</a>' +
             '<a href="#" class="ui-btn ui-corner-all">Player</a>' +
             '<a href="#pageConsole" class="ui-btn ui-corner-all">Raw Console</a>' +
             '<a href="index.html" id="logout" data-ajax="false" class="ui-btn ui-corner-all">Logout</a>' +
@@ -32,14 +33,15 @@ UtilDom.get = function (jqueryId) {
 }
 
 
+
 $(document).one('pagebeforecreate', function () {
     $.mobile.pageContainer.prepend(panel);
     $("#sidebar").panel().enhanceWithin();
 });
 
 $(document).ready(function () {
-    token = getCookie("tshock-token");
-    server = getCookie("tshock-server");
+    token = window.localStorage.getItem("tshock-token");
+    server = window.localStorage.getItem("tshock-server");
 
     if (token != null && server != null) {
 
@@ -72,8 +74,7 @@ $(document).ready(function () {
         }
     }).keyup(function () {
         $(this).colpickSetColor(this.value);
-    });
-
+    }); 
 
     $('a#btnAddUser').click(function () {
         debugger;
@@ -142,6 +143,57 @@ $(document).ready(function () {
             //not ok
         });
     });
+    $('a#pageItemsLink').click(function () {
+        var deferreds = [];
+        tableJson = [];
+        pageCount = 13;        
+        $("#form-filter-items").hide();
+        $('#loader').show();
+
+        for (i = 1; i <= pageCount; i++) {
+            deferreds.push(
+                $.getJSON("https://terraria.gamepedia.com/api.php?action=parse&page=Item%20IDs%20Part" + i + "&format=json", function (data) {
+                    var tableText = $(data.parse.text["*"])[2].outerHTML;
+                    var tableHTML = $(tableText)[0];
+                    tableJson = $.merge(tableJson, tblToJson(tableHTML));
+                })
+            );
+        }
+
+        $.when.apply($, deferreds).then(function () {
+            $("#form-filter-items").show();
+            $('#loader').hide();
+        });
+
+
+
+    });
+
+    $("#itemList").on("filterablebeforefilter", function (e, data) {
+        $input = $(data.input),
+        value = $input.val();
+        $("#itemList").empty();
+
+        if (value && value.length > 2) {
+            var listViewItems = "";
+            var returnedData = $.grep(tableJson, function (element, index) {
+                var itemName = $.trim($(tableJson[i].object)[0].innerText);
+
+                return element.object.toLowerCase().indexOf(value) >= 0;
+            });
+
+            $.each(returnedData, function (i, item) {
+                var imageLink = $(returnedData[i].object).find('img')[0].src;
+                var itemName = $.trim($(returnedData[i].object)[0].innerText);
+                var itemId = returnedData[i].itemid;
+
+                listViewItems += "<li><a href=\"#\"> <img class=\"item-icon\" src=\"" + imageLink + "\" width=\"32\" height=\"32\"> <h2>" + itemName + "</h2><p>Item ID: " + itemId + "</p></a> </li>\n";
+            });
+        }
+        $("#itemList").append(listViewItems);
+        $("#itemList").listview("refresh");
+    });
+
 
     //Settime Events
     $('a#settime-dawn').click(function () {
@@ -301,5 +353,34 @@ $(document).ready(function () {
         }).error(function (xhr, txt, err) {
             alert("Error at server connection");
         });
+    }
+
+    function tblToJson(table) {
+        var data = [];
+
+        // first row needs to be headers
+        var headers = [];
+        for (var i = 0; i < table.rows[0].cells.length; i++) {
+            headers[i] = table.rows[0].cells[i].innerHTML.toLowerCase().replace(/ /gi, '');
+        }
+
+        headers[1] = "itemid";
+
+        // go through cells
+        for (var i = 1; i < table.rows.length; i++) {
+
+            var tableRow = table.rows[i];
+            var rowData = {};
+
+            for (var j = 0; j < tableRow.cells.length; j++) {
+
+                rowData[headers[j]] = tableRow.cells[j].innerHTML.trim();
+
+            }
+
+            data.push(rowData);
+        }
+
+        return data;
     }
 });

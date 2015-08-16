@@ -23,17 +23,9 @@
         checkSessions();
 
         $("a#submit").click(function () {
-
             //JSON TEST
 
-            //var jsonTable = $('#terraria').tableToJSON({
-            //    allowHTML: true,
-            //});
-
-            //$(jsonTable[0].Object).find('img')[0].src -> Picture Link
-            //$(jsonTable[0].Object)[0].innerText -> Item Name
-            //jsonTable[0].value -> Item ID
-
+           
             // load form data
             var server = $("input#server").val() || null;
             var user = $("input#user").val() || null;
@@ -104,20 +96,19 @@
         // request token creation over proxy
         $.ajax({
             type: "GET",
-            //url: "http://" + server + "/token/create/" + user + "/" + pw,
-            url: "https://terraria.gamepedia.com/api.php?action=parse&page=Item%20IDs%20Part1&format=json",
+            url: "http://" + server + "/token/create/" + user + "/" + pw,            
             dataType: "json",
             success: function (data) {
-                // check REST response
-                var tableHTML = $(data.parse.text["*"])[2].outerHTML;
-                $("#test").append(tableHTML);
-                $("#test").show;
-                var tableJson = $(tableHTML).tableToJSON({ allowHTML: true });
-
+                // check REST response                  
                 if (data.status == 200) {
                     var token = data.token;
-                    setCookie("tshock-token", token);
-                    setCookie("tshock-server", server);
+
+                    window.localStorage.setItem("tshock-token", token);
+                    window.localStorage.setItem("tshock-server", server);
+
+                    //setCookie("tshock-token", token);
+                    //setCookie("tshock-server", server);
+
                     window.location.href = "tshock.html";
                 }
                 else {
@@ -151,5 +142,5 @@
             $("#sessions").append("<p><b>No active sessions avalaible. To start a session, please login to your server.</b></p>");
         }
 
-    }
+    }    
 })();

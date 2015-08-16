@@ -155,8 +155,8 @@
             <a href="#sidebar" data-icon="bars" class="ui-btn-right" data-iconpos="notext">Logout</a>
         </div><!-- /header -->
         <div role="main" class="ui-content">
-            
-        <ul data-role="listview" data-inset="true" data-divider-theme="a">
+
+            <ul data-role="listview" data-inset="true" data-divider-theme="a">
                 <li data-role="list-divider">Run console command</li>
                 <li>
                     <input type="text" id="conCommand" value="" placeholder="Command" />
@@ -167,6 +167,34 @@
         <div data-role="footer" data-position="fixed">
             <p><a href="#" data-transition="fade">RestTool</a></p>
         </div><!-- /footer -->
+    </div>
+
+    <div data-role="page" id="pageItems">
+
+        <div data-role="header">
+            <h1>Spawns</h1>
+            <a href="tshock.html" data-icon="back" data-role="button" data-transition="fade" data-direction="reverse" data-iconpos="notext">back</a>
+            <a href="#sidebar" data-icon="bars" class="ui-btn-right" data-iconpos="notext">Logout</a>
+        </div>
+
+        <div role="main" class="ui-content">
+            <div id="loader" data-form="ui-body" class="ui-body ui-corner-all loading-message">
+                <p>Loading Items... please wait</p>                
+                <img id="loading-image" src="css/images/ajax-loader.gif" />
+            </div>            
+
+            <form id="form-filter-items" class="ui-filterable">
+                <input id="filter-items" data-type="search" placeholder="Search item...">
+            </form>
+
+            <ul id="itemList" data-filter="true" data-role="listview" data-filter-reveal="true" data-input="#filter-items" data-inset="true">
+                <li data-role="list-divider">Choose Item</li>
+            </ul>
+        </div>
+
+        <div data-role="footer" data-position="fixed">
+            <p><a href="#" data-transition="fade">RestTool</a></p>
+        </div>
     </div>
 
     <!--Dialogs-->

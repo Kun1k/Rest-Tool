@@ -170,7 +170,7 @@ iframe {
     background-color: #EDEDED;
     display: none;
     border: 2px solid white;
-    border-radius: 20px;   
+    border-radius: 20px;
 }
 
 
@@ -215,8 +215,25 @@ iframe {
 }
 
 .gridBox {
-    background-color: #EDEDED;    
+    background-color: #EDEDED;
     border: 2px solid white;
     border-radius: 20px;
     padding: 50px;
 }
+
+.item-icon {
+    margin-top: 25px;
+}
+
+.loading-message {
+    background-color: #FFFFFF; 
+    display:none;  
+}
+
+    .loading-message img {
+        float: right;
+        margin-top: 5px;       
+    }
+    .loading-message p {
+        float:left;
+    }
