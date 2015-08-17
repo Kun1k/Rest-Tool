@@ -25,7 +25,7 @@
     <!--Pages-->
     <div data-role="page" id="tshock">
         <div data-role="header" data-position="inline">            
-            <a href="#sidebar" data-icon="bars" class="ui-btn-left" data-position="left" data-iconpos="notext"></a>
+            <a href="#sidebar" data-icon="bars" class="ui-btn-right" data-position="left" data-iconpos="notext"></a>
             <h1 class="ui-title" role="heading" aria-level="1">RestTool - TShock</h1>            
         </div>
         <div data-role="content" id="content">             
@@ -200,12 +200,12 @@
         <div data-role="header">
             <h1>Give Item</h1>
             <a href="#pageItems" data-icon="back" data-role="button" data-transition="fade" data-direction="reverse" data-iconpos="notext">back</a>
-            <a href="#sidebar" data-icon="bars" class="ui-btn-right" data-iconpos="notext">Logout</a>
+            <a href="#sidebar" data-icon="bars" class="ui-btn-left" data-iconpos="notext"></a>
         </div>
 
         <div role="main" class="ui-content">           
 
-            <form id="giveItem" class="ui-filterable">
+            <form action="#pageItems" id="giveItem" class="ui-filterable">
                 <input type="number" id="giveItem-count" placeholder="Item count" />
                 <input type="text" id="giveItem-player" placeholder="Name of player" />
                 <input type="submit" value="Give" data-icon="arrow-r" data-iconpos="right"  id="giveItem-submit" />

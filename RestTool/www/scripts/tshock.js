@@ -2,7 +2,7 @@ var tableJson = [];
 var token = null;
 var server = null;
 var color = null;
-var panel = '<div data-role="panel" data-theme="a" id="sidebar" data-position="left" data-display="overlay">' +
+var panel = '<div data-role="panel" data-theme="a" id="sidebar" data-position="right" data-display="overlay">' +
             '<a href="#usermanagement" id="usermanagementLink" class="ui-btn ui-corner-all">User management</a>' +
             '<a href="#pageTime" id="pageTimeLink" class="ui-btn ui-corner-all">Time Settings</a>' +
             '<a href="#pageItems" id="pageItemsLink" class="ui-btn ui-corner-all">Items</a>' +
@@ -42,9 +42,9 @@ $(document).one('pagebeforecreate', function () {
 $(document).on("swipeleft swiperight", ".ui-page", function (e) {
     if ($.mobile.activePage.jqmData("panel") !== "open") {
         if (e.type === "swipeleft") {
-            $("#sidebar").panel("close");
-        } else if (e.type === "swiperight") {
             $("#sidebar").panel("open");
+        } else if (e.type === "swiperight") {
+            $("#sidebar").panel("close");
         }
     }
 });
@@ -57,7 +57,7 @@ $(document).ready(function () {
 
         validateToken().done(function (data) {
             if (data.status == 200) {
-                reloadStartpage();
+                reloadServerInfo();
             } else {
                 forceRedirect("index.html", "Token not valid anymore");
             }
@@ -69,6 +69,12 @@ $(document).ready(function () {
         forceRedirect("index.html", "No valid TShock-cookies");
     }
 
+
+    $(window).on('hashchange', function (data) {
+        if (location.hash == "") {
+            reloadServerInfo();
+        }
+    });
 
     $('#picker').colpick({
         layout: 'rgbhex',
@@ -84,7 +90,7 @@ $(document).ready(function () {
         }
     }).keyup(function () {
         $(this).colpickSetColor(this.value);
-    }); 
+    });
 
     $('a#btnAddUser').click(function () {
         debugger;
@@ -156,7 +162,7 @@ $(document).ready(function () {
     $('a#pageItemsLink').click(function () {
         var deferreds = [];
         tableJson = [];
-        pageCount = 1;        
+        pageCount = 1;
         $("#form-filter-items").hide();
         $('#loader').show();
 
@@ -179,7 +185,8 @@ $(document).ready(function () {
 
     });
 
-    $("#itemList").on("filterablebeforefilter", function (e, data) {        
+    //Terraria Item handling
+    $("#itemList").on("filterablebeforefilter", function (e, data) {
         var value = $(data.input).val().toLowerCase();
 
         $("#itemList").empty();
@@ -204,30 +211,27 @@ $(document).ready(function () {
         $("#itemList").append(listViewItems);
         $("#itemList").listview("refresh");
     });
-
-    
     $('#itemList').on('click', 'li', function (e) {
         var itemId = e.currentTarget.title;
         localStorage.setItem("itemId", itemId);
-        
-    });
 
+    });
     $("#giveItem").on("submit", function () {
         var itemId = localStorage.getItem("itemId");
         var itemCount = $("#giveItem-count").val();
         var playerName = $("#giveItem-player").val();
         proxyJSONRequest("http://" + server + "/v2/server/rawcmd?token=" + token + "&cmd=/give " + itemId + " " + playerName + " " + itemCount).done(function (data) {
-            if (data.status == "200") {
-                alert("Item was given!");
-                location.href("#pageItems");
-            }  
-        }).error(function (data) {
-            alert(data.error);
-        });
+            if (data.status == "200") {                                
+                window.location.href = "tshock.html#pageItems";
+            }
+            else {
+                alert("Something went wrong.");
+            }
+        })
     });
 
     //Time settings
-    $('a#settime-dawn').click(function () {        
+    $('a#settime-dawn').click(function () {
         proxyJSONRequest("http://" + server + "/v2/server/rawcmd?token=" + token + "&cmd=/time 04:30").done(function (data) {
             if (data.status == "200") {
                 alert("Time is set to 04:30.");
@@ -358,26 +362,23 @@ $(document).ready(function () {
         forceRedirect("index.html", "No valid TShock-Server-cookie");
     };
 
-    function reloadStartpage() {
+    function reloadServerInfo() {
         //$.mobile.loading("show", { theme: "a" });
-        getServerStatus().done(function (data) {            
+
+        $("#infobox").empty();
+        getServerStatus().done(function (data) {
             $("#infobox").append("<div class=\"status-header\">Version: " + data.serverversion + "</div>")
             .append("<div class=\"status-item\">Uptime: " + data.uptime + "</div>")
             .append("<div class=\"status-item\">Port: " + data.port + "</div>")
             .append("<div class=\"status-item\">Playercount: " + data.playercount + "</div>")
             .append("<div class=\"status-item\">Maxplayers: " + data.maxplayers + "</div>")
             .append("<div class=\"status-item\">Worldname: " + data.world + "</div>")
-            .fadeIn(700);
+            .fadeIn(500);
 
             if (data.serverpassword) {
                 $(".status-header").append("<span class='ui-icon-lock ui-btn-icon-left' style='position:relative;'></span>");
             }
-
-            $.mobile.loading("hide");
-
-        }).error(function (xhr, txt, err) {
-            alert("Error at server connection");
-        });
+        })
     }
 
     function tblToJson(table) {

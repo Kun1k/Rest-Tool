@@ -106,9 +106,6 @@
                     window.localStorage.setItem("tshock-token", token);
                     window.localStorage.setItem("tshock-server", server);
 
-                    //setCookie("tshock-token", token);
-                    //setCookie("tshock-server", server);
-
                     window.location.href = "tshock.html";
                 }
                 else {
