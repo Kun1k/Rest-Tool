@@ -263,8 +263,7 @@ html body .ui-group-theme-a .ui-bar-inherit {
 .ui-overlay-a,
 .ui-page-theme-a,
 .ui-page-theme-a .ui-panel-wrapper {
-    /*background-color: #f9f9f9 */ /*{a-page-background-color}*/
-    ;
+    /*background-color: #f9f9f9 */ /*{a-page-background-color}*/    
     background-image: url(../images/wall_1.png);
     border-color: #bbbbbb /*{a-page-border}*/;
     color: #333333 /*{a-page-color}*/;

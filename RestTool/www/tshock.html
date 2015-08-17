@@ -172,7 +172,7 @@
     <div data-role="page" id="pageItems">
 
         <div data-role="header">
-            <h1>Spawns</h1>
+            <h1>Item List</h1>
             <a href="tshock.html" data-icon="back" data-role="button" data-transition="fade" data-direction="reverse" data-iconpos="notext">back</a>
             <a href="#sidebar" data-icon="bars" class="ui-btn-right" data-iconpos="notext">Logout</a>
         </div>
@@ -190,6 +190,28 @@
             <ul id="itemList" data-filter="true" data-role="listview" data-filter-reveal="true" data-input="#filter-items" data-inset="true">
                 <li data-role="list-divider">Choose Item</li>
             </ul>
+        </div>
+
+        <div data-role="footer" data-position="fixed">
+            <p><a href="#" data-transition="fade">RestTool</a></p>
+        </div>
+    </div>
+
+    <div data-role="page" id="pageGiveItem">
+
+        <div data-role="header">
+            <h1>Give Item</h1>
+            <a href="tshock.html" data-icon="back" data-role="button" data-transition="fade" data-direction="reverse" data-iconpos="notext">back</a>
+            <a href="#sidebar" data-icon="bars" class="ui-btn-right" data-iconpos="notext">Logout</a>
+        </div>
+
+        <div role="main" class="ui-content">           
+
+            <form id="giveItem" class="ui-filterable">
+                <input type="number" id="giveItem-count" placeholder="Item count" />
+                <input id="giveItem-to" data-type="search" placeholder="Name of player" />
+                <input type="submit" value="Give" data-icon="arrow-r" data-iconpos="right"  id="giveItem-submit" />
+            </form>           
         </div>
 
         <div data-role="footer" data-position="fixed">

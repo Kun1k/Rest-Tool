@@ -4,7 +4,7 @@
     <ReferenceCachePath>C:\Users\Nikolay\AppData\Local\Temp\0wbkldja_RestTool_refcache</ReferenceCachePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">
-    <DebuggerFlavor>RippleNexus</DebuggerFlavor>
+    <DebuggerFlavor>RippleNexus7</DebuggerFlavor>
     <AndroidEmulatorID>AndroidDevice;Gerät</AndroidEmulatorID>
   </PropertyGroup>
 </Project>

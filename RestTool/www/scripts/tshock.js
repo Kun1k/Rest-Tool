@@ -146,7 +146,7 @@ $(document).ready(function () {
     $('a#pageItemsLink').click(function () {
         var deferreds = [];
         tableJson = [];
-        pageCount = 13;        
+        pageCount = 1;        
         $("#form-filter-items").hide();
         $('#loader').show();
 
@@ -187,17 +187,30 @@ $(document).ready(function () {
                 var itemName = $.trim($(returnedData[i].object)[0].innerText);
                 var itemId = returnedData[i].itemid;
 
-                listViewItems += "<li><a href=\"#\"> <img class=\"item-icon\" src=\"" + imageLink + "\" width=\"32\" height=\"32\"> <h2>" + itemName + "</h2><p>Item ID: " + itemId + "</p></a> </li>\n";
+                listViewItems += "<li><a href=\"#pageGiveItem?itemid=" + itemId + " \" data-transition=\"slide\"> <img class=\"item-icon\" src=\"" + imageLink + "\" width=\"32\" height=\"32\"> <h2>" + itemName + "</h2><p>Item ID: " + itemId + "</p></a> </li>\n";
             });
         }
         $("#itemList").append(listViewItems);
         $("#itemList").listview("refresh");
     });
 
+    $("#giveItem").on("submit", function () {
+
+        var jj = window.location.href;
+        proxyJSONRequest("http://" + server + "/v2/server/rawcmd?token=" + token + "&cmd=/give 04:30").done(function (data) {
+            if (data.status == "200") {
+                alert("Time is set to 04:30.");
+            }
+            else {
+                alert(data.error);
+            }
+        }).error(function () {
+            //not ok
+        });
+    });
 
     //Settime Events
-    $('a#settime-dawn').click(function () {
-        debugger;
+    $('a#settime-dawn').click(function () {        
         proxyJSONRequest("http://" + server + "/v2/server/rawcmd?token=" + token + "&cmd=/time 04:30").done(function (data) {
             if (data.status == "200") {
                 alert("Time is set to 04:30.");
@@ -210,7 +223,6 @@ $(document).ready(function () {
         });
     });
     $('a#settime-noon').click(function () {
-        debugger;
         proxyJSONRequest("http://" + server + "/v2/server/rawcmd?token=" + token + "&cmd=/time 12:00").done(function (data) {
             if (data.status == "200") {
                 alert("Time is set to 12:00.");
