@@ -1,4 +1,4 @@
-#JSON Files (configs)
+# JSON Files (configs)
 changeList.json
 
 # Built application files
@@ -34,4 +34,4 @@ platforms/
 plugins/
 windows/
 ios/
-.vs/config/
+.vs/
