@@ -169,15 +169,16 @@ $(document).ready(function () {
 
     });
 
-    $("#itemList").on("filterablebeforefilter", function (e, data) {
-        $input = $(data.input),
-        value = $input.val();
+    $("#itemList").on("filterablebeforefilter", function (e, data) {        
+        var value = $(data.input).val().toLowerCase();
+
         $("#itemList").empty();
 
         if (value && value.length > 2) {
             var listViewItems = "";
+
             var returnedData = $.grep(tableJson, function (element, index) {
-                var itemName = $.trim($(tableJson[i].object)[0].innerText);
+                var itemName = $.trim($(element.object)[0].innerText);
 
                 return element.object.toLowerCase().indexOf(value) >= 0;
             });
@@ -187,7 +188,7 @@ $(document).ready(function () {
                 var itemName = $.trim($(returnedData[i].object)[0].innerText);
                 var itemId = returnedData[i].itemid;
 
-                listViewItems += "<li><a href=\"#pageGiveItem?itemid=" + itemId + " \" data-transition=\"slide\"> <img class=\"item-icon\" src=\"" + imageLink + "\" width=\"32\" height=\"32\"> <h2>" + itemName + "</h2><p>Item ID: " + itemId + "</p></a> </li>\n";
+                listViewItems += "<li><a href=\"#pageGiveItem\" data-transition=\"slide\"> <img class=\"item-icon\" src=\"" + imageLink + "\" width=\"32\" height=\"32\"> <h2>" + itemName + "</h2><p>Item ID: " + itemId + "</p></a> </li>\n";
             });
         }
         $("#itemList").append(listViewItems);
