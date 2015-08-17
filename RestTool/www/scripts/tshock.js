@@ -2,7 +2,7 @@ var tableJson = [];
 var token = null;
 var server = null;
 var color = null;
-var panel = '<div data-role="panel" id="sidebar" data-theme="a" data-position="right" data-display="overlay">' +
+var panel = '<div data-role="panel" data-theme="a" id="sidebar" data-position="left" data-display="overlay">' +
             '<a href="#usermanagement" id="usermanagementLink" class="ui-btn ui-corner-all">User management</a>' +
             '<a href="#pageTime" id="pageTimeLink" class="ui-btn ui-corner-all">Time Settings</a>' +
             '<a href="#pageItems" id="pageItemsLink" class="ui-btn ui-corner-all">Items</a>' +
@@ -37,6 +37,16 @@ UtilDom.get = function (jqueryId) {
 $(document).one('pagebeforecreate', function () {
     $.mobile.pageContainer.prepend(panel);
     $("#sidebar").panel().enhanceWithin();
+});
+
+$(document).on("swipeleft swiperight", ".ui-page", function (e) {
+    if ($.mobile.activePage.jqmData("panel") !== "open") {
+        if (e.type === "swipeleft") {
+            $("#sidebar").panel("close");
+        } else if (e.type === "swiperight") {
+            $("#sidebar").panel("open");
+        }
+    }
 });
 
 $(document).ready(function () {
@@ -345,20 +355,18 @@ $(document).ready(function () {
     };
 
     function reloadStartpage() {
-        $.mobile.loading("show", { theme: "b" });
-        getServerStatus().done(function (data) {
-
-            $("#loading").hide();
-            $("#infobox").append("<h2 id='status-header'>Server: " + data.name + " / Version: " + data.serverversion + "</h2>")
-            .append("<div>Uptime: " + data.uptime + "</div>")
-            .append("<div>Port: " + data.port + "</div>")
-            .append("<div>Playercount: " + data.playercount + "</div>")
-            .append("<div>Maxplayers: " + data.maxplayers + "</div>")
-            .append("<div>Worldname: " + data.world + "</div>")
+        //$.mobile.loading("show", { theme: "a" });
+        getServerStatus().done(function (data) {            
+            $("#infobox").append("<div class=\"status-header\">Version: " + data.serverversion + "</div>")
+            .append("<div class=\"status-item\">Uptime: " + data.uptime + "</div>")
+            .append("<div class=\"status-item\">Port: " + data.port + "</div>")
+            .append("<div class=\"status-item\">Playercount: " + data.playercount + "</div>")
+            .append("<div class=\"status-item\">Maxplayers: " + data.maxplayers + "</div>")
+            .append("<div class=\"status-item\">Worldname: " + data.world + "</div>")
             .fadeIn(700);
 
             if (data.serverpassword) {
-                $("#status-header").append("<span class='ui-icon-lock ui-btn-icon-left' style='position:relative;'></span>");
+                $(".status-header").append("<span class='ui-icon-lock ui-btn-icon-left' style='position:relative;'></span>");
             }
 
             $.mobile.loading("hide");
