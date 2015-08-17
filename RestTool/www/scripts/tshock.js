@@ -198,29 +198,35 @@ $(document).ready(function () {
                 var itemName = $.trim($(returnedData[i].object)[0].innerText);
                 var itemId = returnedData[i].itemid;
 
-                listViewItems += "<li><a href=\"#pageGiveItem\" data-transition=\"slide\"> <img class=\"item-icon\" src=\"" + imageLink + "\" width=\"32\" height=\"32\"> <h2>" + itemName + "</h2><p>Item ID: " + itemId + "</p></a> </li>\n";
+                listViewItems += "<li title=\"" + itemId + "\"><a href=\"#pageGiveItem\" data-transition=\"slide\"> <img class=\"item-icon\" src=\"" + imageLink + "\" width=\"32\" height=\"32\"> <h2>" + itemName + "</h2><p>Item ID: " + itemId + "</p></a> </li>\n";
             });
         }
         $("#itemList").append(listViewItems);
         $("#itemList").listview("refresh");
     });
 
-    $("#giveItem").on("submit", function () {
+    
+    $('#itemList').on('click', 'li', function (e) {
+        var itemId = e.currentTarget.title;
+        localStorage.setItem("itemId", itemId);
+        
+    });
 
-        var jj = window.location.href;
-        proxyJSONRequest("http://" + server + "/v2/server/rawcmd?token=" + token + "&cmd=/give 04:30").done(function (data) {
+    $("#giveItem").on("submit", function () {
+        var itemId = localStorage.getItem("itemId");
+        var itemCount = $("#giveItem-count").val();
+        var playerName = $("#giveItem-player").val();
+        proxyJSONRequest("http://" + server + "/v2/server/rawcmd?token=" + token + "&cmd=/give " + itemId + " " + playerName + " " + itemCount).done(function (data) {
             if (data.status == "200") {
-                alert("Time is set to 04:30.");
-            }
-            else {
-                alert(data.error);
-            }
-        }).error(function () {
-            //not ok
+                alert("Item was given!");
+                location.href("#pageItems");
+            }  
+        }).error(function (data) {
+            alert(data.error);
         });
     });
 
-    //Settime Events
+    //Time settings
     $('a#settime-dawn').click(function () {        
         proxyJSONRequest("http://" + server + "/v2/server/rawcmd?token=" + token + "&cmd=/time 04:30").done(function (data) {
             if (data.status == "200") {
@@ -272,7 +278,7 @@ $(document).ready(function () {
         });
     });
 
-    //Setevents
+    //Invasions
     $('a#setevent-blood').click(function () {
         debugger;
         proxyJSONRequest("http://" + server + "/v2/server/rawcmd?token=" + token + "&cmd=/bloodmoon").done(function (data) {
@@ -325,8 +331,6 @@ $(document).ready(function () {
             //not ok
         });
     });
-
-
     $('a#logout').click(function () {
         deleteCookie("tshock-server");
         deleteCookie("tshock-token");
