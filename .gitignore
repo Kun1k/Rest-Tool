@@ -1,6 +1,3 @@
-# JSON Files (configs)
-changeList.json
-
 # Built application files
 *.apk
 *.ap_
@@ -28,6 +25,8 @@ proguard/
 
 # Log Files
 *.log
+
+*.json
 
 #Platforms
 platforms/
