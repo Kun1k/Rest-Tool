@@ -72,6 +72,7 @@
     "www\\css\\images\\icons-png\\arrow-d-l-black.png",
     "www\\css\\images\\icons-png\\arrow-u-r-black.png",
     "res\\icons\\ios\\icon-60-3x.png",
+    "config.xml",
     "www\\css\\images\\icons-png\\bullets-black.png",
     "www\\scripts\\colpick.js",
     "res\\screens\\wp8\\SplashScreenImage.jpg",
@@ -183,21 +184,13 @@
     "www\\css\\images\\icons-png\\search-white.png",
     "res\\icons\\windows\\Square44x44Logo.scale-240.png",
     "res\\screens\\android\\screen-mdpi-portrait.png",
-    "www\\scripts\\tshock.js~RF15acfca7.TMP",
-    "www\\scripts\\tshock.js~RF15ba8650.TMP",
-    "www\\tshock.html~RF15c2aa92.TMP",
-    "config.xml"
+    "www\\tshock.html~RF1999391f.TMP",
+    "www\\scripts\\tshock.js~RF1aa429aa.TMP"
   ],
   "deletedFilesIos": [],
   "addedPluginsIos": [],
   "deletedPluginsIos": [],
-  "changedFiles": [
-    "www\\scripts\\index.js",
-    "www\\scripts\\tshock.js",
-    "www\\tshock.html",
-    "www\\tshock.html~RF15c2aa92.TMP",
-    "config.xml"
-  ],
+  "changedFiles": [],
   "deletedFiles": [],
   "addedPlugins": [],
   "deletedPlugins": []

@@ -5,7 +5,7 @@ var color = null;
 var panel = '<div data-role="panel" data-theme="a" id="sidebar" data-position="right" data-display="overlay">' +
             '<a href="#usermanagement" id="usermanagementLink" class="ui-btn ui-corner-all">User management</a>' +
             '<a href="#pageTime" id="pageTimeLink" class="ui-btn ui-corner-all">Time Settings</a>' +
-            '<a href="#pageItems" id="pageItemsLink" class="ui-btn ui-corner-all">Items</a>' +
+            '<a href="#pageItems" id="pageItemsLink" class="ui-btn ui-corner-all" data-disabled=\"true\">Items</a>' +
             '<a href="#" class="ui-btn ui-corner-all">Player</a>' +
             '<a href="#pageConsole" class="ui-btn ui-corner-all">Raw Console</a>' +
             '<a href="index.html" id="logout" data-ajax="false" class="ui-btn ui-corner-all">Logout</a>' +
@@ -186,7 +186,7 @@ $(document).ready(function () {
     });
 
     //Terraria Item handling
-    $("#itemList").on("filterablebeforefilter", function (e, data) {
+    $('#itemList').on('filterablebeforefilter', function (e, data) {
         var value = $(data.input).val().toLowerCase();
 
         $("#itemList").empty();
@@ -216,12 +216,13 @@ $(document).ready(function () {
         localStorage.setItem("itemId", itemId);
 
     });
-    $("#giveItem").on("submit", function () {
+    $('#giveItem').on("click", function () {
         var itemId = localStorage.getItem("itemId");
         var itemCount = $("#giveItem-count").val();
         var playerName = $("#giveItem-player").val();
         proxyJSONRequest("http://" + server + "/v2/server/rawcmd?token=" + token + "&cmd=/give " + itemId + " " + playerName + " " + itemCount).done(function (data) {
-            if (data.status == "200") {                                
+            if (data.status == "200") {
+                localStorage.removeItem("itemId");
                 window.location.href = "tshock.html#pageItems";
             }
             else {
